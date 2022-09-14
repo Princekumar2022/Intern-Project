@@ -9,6 +9,7 @@ const internController=require("../controllers/internControllers")
 
   router.post("/functionup/colleges",collegeController.createCollege)
  
+  router.post("/functionup/interns",internController.createIntern)
  
  
  
@@ -20,3 +21,5 @@ const internController=require("../controllers/internControllers")
  
  
   module.exports=router
+
+  // url veriffication regex not done
