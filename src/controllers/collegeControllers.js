@@ -1,5 +1,5 @@
 const collegeModel = require('../models/collegeModel')
-//const internModel = require('../model/internModel')
+const internModel = require('../models/internModel')
 const regEx = /^[a-zA-Z ]*$/;
 const regExLogoLink =  /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/
 
@@ -49,23 +49,37 @@ const createCollege = async function (req, res) {
     }
 }
 
+
 /////////////////////////////////get college///
 
 
 
-// const CollegeDetails=async function(req,res){
-//     try {
+const CollegeDetails=async function(req,res){
+    try {
+        let collegeName = req.query.collegeName
 
+        if (!collegeName || !collegeName.trim()) {
+            return res.status(400).send({ status: false, msg: "Invalid request Please provide valid details in Query" });
+        }
 
+        const collegeDetails = await collegeModel.findOne({ name: collegeName })
+        if (!collegeDetails) return res.status(404).send({ status: false, msg: "College doesn't exist" })
+        let interns = await internModel.find({ collegeId: collegeDetails._id }).select({ name: 1, email: 1, mobile: 1 })
 
+        let data = { name: collegeDetails.name, fullName: collegeDetails.fullName, logoLink: collegeDetails.logoLink, interns: interns }
+        res.status(200).send({ status: true, data: data })
+    } catch (err) {
+        return res.status(500).send({ status: false, msg: err.message })
 
-//     } catch (error) {
-
-//     }
-// }
+    }
+}
 
 
 module.exports.createCollege = createCollege;
+module.exports.CollegeDetails = CollegeDetails
+
+
+
 
 
 
