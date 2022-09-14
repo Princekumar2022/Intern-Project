@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
-const moongoose = require("moongoose")
 
-const collegeSchema = new mongoose.schema({
+
+const collegeSchema = new mongoose.Schema({
 
 name: {
     type: String,
@@ -27,7 +27,7 @@ isDeleated: {
 
 
 
-module.exports= moongoose.model("college", collegeSchema)
+module.exports= mongoose.model("college", collegeSchema)
 
 
 
