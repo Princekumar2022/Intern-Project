@@ -15,18 +15,13 @@ const isValidation = function (value) {
 }
 
 
-const validId = function (Id) {
-    if (mongoose.Types.ObjectId.isValid(Id)) return true
-    return false
-}
-
 
 ////////////////////////////////////////////////Create Intern/////////////////////////////////////////////////////////////
 
 const createIntern = async function (req, res) {
     try {
         let data = req.body
-        let { name, email, mobile, collegeId } = data
+        let { name, email, mobile, collegeName } = data
         if (Object.keys(data).length == 0) {
             return res.status(400).send({ status: false, msg: "body should not be empty" })
         }
@@ -56,15 +51,15 @@ const createIntern = async function (req, res) {
         if (search) {
             return res.status(400).send({ status: false, msg: "  email is already registered " })
         }
-        if (!collegeId) return res.status(400).send({ status: false, msg: "plese provided college Id" })
-        if (!validId(collegeId)) return res.status(400).send({ status: false, msg: " college Id does not exist" })
-        let collegeId1 = await collegeModel.findById(data.collegeId)
-
-        if (!collegeId1) return res.status(400).send({ status: false, msg: "college Id is not valid" })
-        let newData = { name, email, mobile, collegeId }
-        let saveData = await internModel.create(newData)
-        let newData1 = { isDeleted: saveData.isDeleated, name: saveData.name, email: saveData.email, mobile: saveData.mobile, collegeId: saveData.collegeId }
-        return res.status(200).send({ status: true, msg: " intern created suceesfully", data: { newData1 } })
+        if (!isValidation(collegeName)) return res.status(400).send({ status: false, msg: "not a valid collegename" })
+        search = await collegeModel.findOne({ name: collegeName })
+        if (search == null) return res.status(400).send({ status: false, msg: "no college found by this name" })
+        let collegeId = search._id
+        if (!collegeId) return res.status(400).send({ status: false, msg: "college does not exist" })
+        let allData = { name, email, mobile, collegeId }
+        let newData = await internModel.create(allData)
+        let newData1 = { isDeleted: newData.isDeleated, name: newData.name, email: newData.email, mobile: newData.mobile, collegeId }
+        return res.status(201).send({ status: true, msg: "intern created sucessfully", data: newData1 })
 
     } catch (err) {
         return res.status(500).send({ status: false, msg: err.message })
