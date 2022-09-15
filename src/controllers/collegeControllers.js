@@ -1,18 +1,22 @@
 const collegeModel = require('../models/collegeModel')
 const internModel = require('../models/internModel')
+
 const regEx = /^[a-zA-Z ]*$/;
 const regExLogoLink =  /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/
 
 
 
 
-
+// validation
 const isValidation = function (value) {
     if (typeof value == 'undefined' || value == null) return false
     if (typeof value == "string" && value.trim().length == 0) return false
     return true
 }
 
+
+
+///////////////////////////////////////////////Create College/////////////////////////////////////////////////////////////
 
 const createCollege = async function (req, res) {
     try {
@@ -50,9 +54,9 @@ const createCollege = async function (req, res) {
 }
 
 
-/////////////////////////////////get college///
 
 
+///////////////////////////////////////////////////////Get College////////////////////////////////////////////////////////
 
 const CollegeDetails=async function(req,res){
     try {
@@ -75,8 +79,16 @@ const CollegeDetails=async function(req,res){
 }
 
 
+
+
 module.exports.createCollege = createCollege;
 module.exports.CollegeDetails = CollegeDetails
+
+
+
+///////////////////////////////////////////////////////End////////////////////////////////////////////////////////////////
+
+
 
 
 

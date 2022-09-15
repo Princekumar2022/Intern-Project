@@ -1,16 +1,19 @@
 const collegeModel = require('../models/collegeModel')
 const internModel = require('../models/internModel')
 const mongoose = require("mongoose")
+
 const regEx = /^[a-zA-Z ]*$/;
 const regexNumber = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/
 const regexMail = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
 
 
+// Validation
 const isValidation = function (value) {
     if (typeof value == 'undefined' || value == null) return false
     if (typeof value == "string" && value.trim().length == 0) return false
     return true
 }
+
 
 const validId = function (Id) {
     if (mongoose.Types.ObjectId.isValid(Id)) return true
@@ -18,6 +21,7 @@ const validId = function (Id) {
 }
 
 
+////////////////////////////////////////////////Create Intern/////////////////////////////////////////////////////////////
 
 const createIntern = async function (req, res) {
     try {
@@ -70,3 +74,8 @@ const createIntern = async function (req, res) {
 
 
 module.exports.createIntern = createIntern
+
+
+
+
+////////////////////////////////////////////////////End///////////////////////////////////////////////////////////////////
