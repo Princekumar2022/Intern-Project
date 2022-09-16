@@ -46,7 +46,7 @@ const createCollege = async function (req, res) {
         }
         let createCollege = await collegeModel.create(collegeData)
         let newData = { name: createCollege.name, fullName: createCollege.fullName, logoLink: createCollege.logoLink, isDeleted: createCollege.isDeleated }
-        return res.send({ status: true, msg: "college created successfully", data: newData })
+        return res.status(201).send({ status: true, msg: "college created successfully", data: newData })
     }
     catch (err) {
         return res.status(500).send({ status: false, msg: err.message })
