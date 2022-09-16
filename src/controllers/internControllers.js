@@ -58,7 +58,7 @@ const createIntern = async function (req, res) {
         if (!collegeId) return res.status(400).send({ status: false, msg: "college does not exist" })
         let allData = { name, email, mobile, collegeId }
         let newData = await internModel.create(allData)
-        let newData1 = { isDeleted: newData.isDeleated, name: newData.name, email: newData.email, mobile: newData.mobile, collegeId }
+        let newData1 = { isDeleted: newData.isDeleted, name: newData.name, email: newData.email, mobile: newData.mobile, collegeId }
         return res.status(201).send({ status: true, msg: "intern created sucessfully", data: newData1 })
 
     } catch (err) {

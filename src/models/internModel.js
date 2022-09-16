@@ -30,7 +30,7 @@ const internSchema = new mongoose.Schema({
         ref: "college",
         trim: true
     },
-    isDeleated: {
+    isDeleted: {
         type: Boolean,
         default: false
     }

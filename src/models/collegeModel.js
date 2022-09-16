@@ -21,7 +21,7 @@ logoLink: {
     trim: true
 
 },
-isDeleated: {
+isDeleted: {
     type: Boolean,
      default: false
     }
