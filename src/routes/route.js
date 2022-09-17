@@ -5,26 +5,16 @@ const collegeController = require("../controllers/collegeControllers")
 
 const internController = require("../controllers/internControllers")
 
-
-
-//Create college
+// -----------------------Create college---------------------------------//
 router.post("/functionup/colleges", collegeController.createCollege)
 
-//Create Intern
+//--------------------------Create Intern--------------------------------//
 router.post("/functionup/interns", internController.createIntern)
 
-//college Details
+//--------------------------college Details-------------------------------//
 router.get("/functionup/collegeDetails", collegeController.CollegeDetails)
-
-
-
-
-
-
-
 module.exports = router
 
 
+//
 
-
-  // url veriffication regex not done
