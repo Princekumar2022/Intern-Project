@@ -19,7 +19,8 @@ const isValidation = function (value) {
 ////////////////////////////////////////////////Create Intern/////////////////////////////////////////////////////////////
 
 const createIntern = async function (req, res) {
-    try {
+    res.setHeader('Access-Control-Allow-Origin','*')
+    try  {
         let data = req.body
         let { name, email, mobile, collegeName } = data
         if (Object.keys(data).length == 0) {
